@@ -1,9 +1,9 @@
 .PHONY: clean repro
 
 clean:
-	sudo chown -R $(USER):$(USER) data && \
+	sudo chown -R $(USER):$(USER) data log && \
 		rm -rf $(CURDIR)/data/.erlang.cookie $(CURDIR)/data/mnesia $(CURDIR)/log/rabbit.log
-	docker image rm feature-flags-test || true
+	docker container rm -f feature-flags-test || true
 
-repro:
+repro: clean
 	$(CURDIR)/repro.sh
